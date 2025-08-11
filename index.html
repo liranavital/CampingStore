@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#1e3a8a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>חנות קמפינג מודרנית</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-brand">
+        <i class="fas fa-campground"></i>
+        <h1>קמפינג סטור</h1>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="חיפוש מוצרים...">
+          <button class="search-btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="nav-cart">
+        <button id="cart-toggle" class="cart-toggle">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count">0</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <div class="hero-content">
+        <h2>הציוד הטוב ביותר לקמפינג</h2>
+        <p>גלה את המוצרים האיכותיים שלנו לטיולים וקמפינג</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <i class="fas fa-users"></i>
+            <span>10,000+ לקוחות מרוצים</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-shipping-fast"></i>
+            <span>משלוח חינם מעל 200 ש״ח</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-shield-alt"></i>
+            <span>אחריות מלאה על כל המוצרים</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Product Showcase -->
+    <section class="main-showcase">
+      <div class="container">
+        <div class="showcase-card" id="main-showcase">
+          <div class="showcase-image">
+            <img src="images/image_1.jpeg" alt="מוצרי קמפינג מובילים" loading="lazy">
+            <div class="showcase-overlay">
+              <div class="showcase-content">
+                <h3>המוצרים המובילים שלנו</h3>
+                <p>עגלת קמפינג וכיסא ים איכותיים</p>
+                <button class="showcase-btn" onclick="openProductModal()">
+                  <i class="fas fa-eye"></i>
+                  צפה במוצרים
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-section">
+      <div class="container">
+        <h2 class="section-title">מוצרים מומלצים</h2>
+        <div class="featured-grid" id="featured-grid">
+          <!-- Featured products will be loaded here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+      <div class="container">
+        <h2 class="section-title">קטגוריות מוצרים</h2>
+        <div class="categories-grid">
+          <div class="category-card" data-category="all">
+            <i class="fas fa-th-large"></i>
+            <h3>הכל</h3>
+          </div>
+          <div class="category-card" data-category="אוהלים">
+            <i class="fas fa-campground"></i>
+            <h3>אוהלים</h3>
+          </div>
+          <div class="category-card" data-category="ריהוט">
+            <i class="fas fa-chair"></i>
+            <h3>ריהוט</h3>
+          </div>
+          <div class="category-card" data-category="שינה">
+            <i class="fas fa-bed"></i>
+            <h3>שינה</h3>
+          </div>
+          <div class="category-card" data-category="בישול">
+            <i class="fas fa-fire"></i>
+            <h3>בישול</h3>
+          </div>
+          <div class="category-card" data-category="תאורה">
+            <i class="fas fa-lightbulb"></i>
+            <h3>תאורה</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="products-section">
+      <div class="container">
+        <div class="products-header">
+          <h2 class="section-title">המוצרים שלנו</h2>
+          <div class="products-controls">
+            <div class="sort-container">
+              <select id="sort-select">
+                <option value="default">מיון לפי</option>
+                <option value="price-low">מחיר: מהנמוך לגבוה</option>
+                <option value="price-high">מחיר: מהגבוה לנמוך</option>
+                <option value="name">שם מוצר</option>
+                <option value="rating">דירוג</option>
+              </select>
+            </div>
+            <div class="view-toggle">
+              <button class="view-btn active" data-view="grid">
+                <i class="fas fa-th-large"></i>
+              </button>
+              <button class="view-btn" data-view="list">
+                <i class="fas fa-list"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="products-grid" id="products-grid">
+          <!-- Products will be loaded dynamically -->
+        </div>
+
+        <div class="load-more-container">
+          <button id="load-more-btn" class="load-more-btn">
+            <i class="fas fa-plus"></i>
+            טען עוד מוצרים
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+      <div class="container">
+        <h2 class="section-title">חדשות וטיפים</h2>
+        <div class="news-grid">
+          <article class="news-card">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop"
+              alt="טיפים לקמפינג">
+            <div class="news-content">
+              <h3>10 טיפים לקמפינג מושלם</h3>
+              <p>גלה את הסודות לקמפינג בטוח ומהנה עם המשפחה</p>
+              <div class="news-meta">
+                <span><i class="fas fa-calendar"></i> 15 בדצמבר 2024</span>
+                <span><i class="fas fa-eye"></i> 1,234 צפיות</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="news-card">
+            <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=400&h=250&fit=crop"
+              alt="ציוד חורף">
+            <div class="news-content">
+              <h3>הציוד החיוני לקמפינג בחורף</h3>
+              <p>כל מה שצריך לדעת על קמפינג בטוח בחודשי החורף</p>
+              <div class="news-meta">
+                <span><i class="fas fa-calendar"></i> 10 בדצמבר 2024</span>
+                <span><i class="fas fa-eye"></i> 987 צפיות</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="news-card">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop" alt="בטיחות">
+            <div class="news-content">
+              <h3>כללי בטיחות לקמפינג</h3>
+              <p>מדריך מקיף לבטיחות בקמפינג עם ילדים</p>
+              <div class="news-meta">
+                <span><i class="fas fa-calendar"></i> 5 בדצמבר 2024</span>
+                <span><i class="fas fa-eye"></i> 756 צפיות</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <div class="container">
+        <h2 class="section-title">גלריית המוצרים</h2>
+        <div class="gallery-grid">
+          <img src="images/image_1.jpeg" alt="מוצר קמפינג" loading="lazy" />
+          <img src="images/image_2.jpeg" alt="מוצר קמפינג" loading="lazy" />
+          <img src="images/image_3.jpeg" alt="מוצר קמפינג" loading="lazy" />
+          <img src="images/image_4.jpeg" alt="מוצר קמפינג" loading="lazy" />
+          <img src="images/image_5.jpeg" alt="מוצר קמפינג" loading="lazy" />
+          <img src="images/image_6.jpeg" alt="מוצר קמפינג" loading="lazy" />
+          <img src="images/image_7.jpeg" alt="מוצר קמפינג" loading="lazy" />
+          <img src="images/image_8.jpeg" alt="מוצר קמפינג" loading="lazy" />
+          <img src="images/image_9.jpeg" alt="מוצר קמפינג" loading="lazy" />
+          <img src="images/image_10.jpeg" alt="מוצר קמפינג" loading="lazy" />
+          <img src="images/image_11.jpeg" alt="מוצר קמפינג" loading="lazy" />
+          <img src="images/image_12.jpeg" alt="מוצר קמפינג" loading="lazy" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Product Selection Modal -->
+  <div class="product-selection-modal" id="product-selection-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>בחר את המוצר שלך</h3>
+        <button class="close-modal" id="close-product-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="product-selection-grid">
+          <div class="product-selection-card" onclick="selectProduct('camping-cart')">
+            <img src="images/image_1.jpeg" alt="עגלת קמפינג">
+            <div class="product-selection-info">
+              <h4>עגלת קמפינג</h4>
+              <p>עגלה מתקפלת איכותית לקמפינג</p>
+              <div class="product-selection-price">399 ש״ח</div>
+              <button class="select-product-btn">
+                <i class="fas fa-shopping-cart"></i>
+                בחר מוצר זה
+              </button>
+            </div>
+          </div>
+
+          <div class="product-selection-card" onclick="selectProduct('beach-chair')">
+            <img src="images/image_2.jpeg" alt="כיסא ים">
+            <div class="product-selection-info">
+              <h4>כיסא ים</h4>
+              <p>כיסא נוח וקל משקל לחוף</p>
+              <div class="product-selection-price">299 ש״ח</div>
+              <button class="select-product-btn">
+                <i class="fas fa-shopping-cart"></i>
+                בחר מוצר זה
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Sidebar -->
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h3>סל קניות</h3>
+      <button class="close-cart" id="close-cart">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="cart-items" id="cart-items">
+      <!-- Cart items will be loaded here -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>סה״כ:</span>
+        <span id="cart-total">0 ש״ח</span>
+      </div>
+
+      <div class="cart-shipping">
+        <div class="shipping-info">
+          <i class="fas fa-shipping-fast"></i>
+          <span>משלוח חינם מעל 200 ש״ח</span>
+        </div>
+        <div class="shipping-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="shipping-progress"></div>
+          </div>
+          <span id="shipping-remaining">עוד 200 ש״ח למשלוח חינם</span>
+        </div>
+      </div>
+
+      <div class="payment-methods">
+        <h4>בחר אמצעי תשלום:</h4>
+
+        <!-- Credit Card Payment -->
+        <div class="payment-option">
+          <input type="radio" id="credit-card" name="payment" value="credit-card" checked>
+          <label for="credit-card">
+            <i class="fas fa-credit-card"></i>
+            כרטיס אשראי
+          </label>
+        </div>
+
+        <!-- PayPal Payment -->
+        <div class="payment-option">
+          <input type="radio" id="paypal" name="payment" value="paypal">
+          <label for="paypal">
+            <i class="fab fa-paypal"></i>
+            PayPal
+          </label>
+        </div>
+      </div>
+
+      <button class="checkout-btn" id="checkout-btn" disabled>
+        <i class="fas fa-lock"></i>
+        המשך לתשלום
+      </button>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div class="payment-modal" id="payment-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>פרטי תשלום</h3>
+        <button class="close-modal" id="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div id="credit-card-form" class="payment-form">
+          <div class="form-group">
+            <label for="card-number">מספר כרטיס</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="expiry">תוקף</label>
+              <input type="text" id="expiry" placeholder="MM/YY" maxlength="5">
+            </div>
+            <div class="form-group">
+              <label for="cvv">CVV</label>
+              <input type="text" id="cvv" placeholder="123" maxlength="3">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="card-name">שם בעל הכרטיס</label>
+            <input type="text" id="card-name" placeholder="שם מלא">
+          </div>
+
+          <div class="form-group">
+            <label for="email">אימייל</label>
+            <input type="email" id="email" placeholder="your@email.com">
+          </div>
+
+          <button class="pay-btn" id="pay-btn">
+            <i class="fas fa-credit-card"></i>
+            שלם עכשיו
+          </button>
+        </div>
+
+        <div id="paypal-form" class="payment-form" style="display: none;">
+          <div id="paypal-button-container"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-spinner" id="loading-spinner">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="success-modal" id="success-modal">
+    <div class="success-content">
+      <i class="fas fa-check-circle"></i>
+      <h3>התשלום הושלם בהצלחה!</h3>
+      <p>תודה על הרכישה שלך. תקבל אישור במייל בקרוב.</p>
+      <button class="success-btn" onclick="window.location.reload()">
+        חזור לחנות
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=test&currency=ILS"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
